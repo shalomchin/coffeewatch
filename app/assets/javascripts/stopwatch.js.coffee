@@ -12,6 +12,7 @@ class @TimerWidget
     @interval = undefined
     this.define_start_behaviour()
     this.define_reset_behaviour()
+    @seconds = 0
 
   define_start_behaviour: =>
     @start_button.on 'click', =>
@@ -33,7 +34,8 @@ class @TimerWidget
 
   update_current_second_elapsed: =>
     @current_seconds_elapsed++
-    console.log @current_seconds_elapsed
+    $('#timer').text(@seconds)
+    # console.log @current_seconds_elapsed
     obj = this.secondsToTime()
     # console.log obj
 
@@ -41,7 +43,7 @@ class @TimerWidget
     secs = @current_seconds_elapsed
     minutes = Math.floor(@current_seconds_elapsed / 600)
     divisor = @current_seconds_elapsed % 600
-    seconds = Math.ceil(divisor)
+    @seconds = Math.ceil(divisor)
     obj = 
       'm': minutes
       's': seconds
@@ -49,7 +51,8 @@ class @TimerWidget
 
   bind_reset_button: => 
     @current_seconds_elapsed = 0
-    console.log @current_seconds_elapsed 
+    $('#timer').text(@current_seconds_elapsed )
+    
 
 $(document).ready ->
   t = new TimerWidget
