@@ -1,8 +1,13 @@
+h1 {
+	font-size: 80px;
+	font-style: normal;
+	font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+}
+
 body {
 	text-align: center;
-	margin-top: 100px;
 	background-color: black;
-	text-align: center;
+
 }
 
 img {
@@ -10,11 +15,12 @@ img {
 	height: 100px;
 }
 
-#timer {
+p {
 	font-family: "Lato";
 	color: grey;
 	font-size: 200px;
 	font-weight: 300;
+	margin: 40px;
 }
 
 button {
