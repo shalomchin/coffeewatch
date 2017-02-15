@@ -6,7 +6,6 @@ class @TimerWidget
     @reset_button = $('#reset')
     @timer_area = $('#timer')
     
-    @hello = 0
     @running = false
     @current_seconds_elapsed = 0
     @interval = undefined
@@ -14,6 +13,7 @@ class @TimerWidget
     this.define_reset_behaviour()
     @seconds = 0
     @minutes = 0
+    @milliseconds = 0
 
   define_start_behaviour: =>
     @start_button.on 'click', =>
@@ -35,8 +35,17 @@ class @TimerWidget
 
   update_current_second_elapsed: =>
     @current_seconds_elapsed++
-    $('#timerseconds').text(@seconds)
-    $('#timermilliseconds').text(@current_seconds_elapsed + "0")
+    if @seconds < 10
+      $('#timermilliseconds').text(@milliseconds + "0")
+      $('#timerseconds').text('0'+ @seconds)
+    else
+      $('#timermilliseconds').text(@milliseconds + "")
+      $('#timerseconds').text(@seconds)
+    # if @seconds < 6000
+    #   $('#minutes').text('0' + @minutes)
+    
+    # if @minutes < 10
+    #   $('#timerminutes').text('0'+ @minutes)
     # console.log @current_seconds_elapsed
     obj = this.secondsToTime()
     # console.log @minutes
@@ -45,8 +54,12 @@ class @TimerWidget
   secondsToTime: =>
     secs = @current_seconds_elapsed
     @minutes = Math.floor(@current_seconds_elapsed / 600)
-    divisor = @current_seconds_elapsed / 10
+    divisor = @current_seconds_elapsed %600 / 10
     @seconds = Math.floor(divisor)
+    @milliseconds = @current_seconds_elapsed % 10
+
+    
+
     
     # while @current_seconds_elapsed.length < 2
     #   milliseconds = '0' + milliseconds;
@@ -60,6 +73,8 @@ class @TimerWidget
   bind_reset_button: => 
     @current_seconds_elapsed = 0
     $('#timermilliseconds').text(@current_seconds_elapsed + "0")
+    $('#timerseconds').text(@current_seconds_elapsed + "0")
+    $('#timerminutes').text(@current_seconds_elapsed + "0")
     
 
 $(document).ready ->
